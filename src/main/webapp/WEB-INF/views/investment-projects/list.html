@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Инвестиционные проекты</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-projects/list.css}">
+</head>
+<body>
+<!--header-->
+<div th:replace="shared/header :: header"></div>
+<!--header-->
+
+<main class="main">
+    <div class="main-wrapper">
+        <div class="table-header">
+            <h1>Инвестиционные проекты</h1>
+
+            <form th:action="@{/investment-projects/new}" th:method="GET">
+                <button type="submit" class="icon-button">
+                    <i class="bi bi-journal-plus icon"></i>
+                </button>
+            </form>
+        </div>
+        <div class="table-wrapper">
+            <th:block th:if="${!investmentProjects.isEmpty()}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Код проекта</th>
+                        <th>Объект инвестирования</th>
+                        <th>Инвестиции</th>
+                        <th>Срок реализации, лет</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${investmentProjects}">
+                        <td>
+                            <a class="link" th:href="@{/investment-projects/{id}(id=${project.getCode()})}" th:text="${project.getCode()}"></a>
+                        </td>
+                        <td th:text="${project.getObject()}"></td>
+                        <td th:text="${project.getInvestments()} + ' ' + ${project.getCurrency().getCode()}"></td>
+                        <td th:text="${project.getImplementationPeriod()}"></td>
+                        <td>
+                            <form th:action="@{/investment-projects/{id}/edit(id = ${project.getCode()})}" th:method="GET">
+                                <button type="submit" class="icon-button">
+                                    <i class="bi bi-pencil-square icon"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/investment-projects/{id}(id = ${project.getCode()})}" th:method="DELETE">
+                                <button type="submit" class="icon-button">
+                                    <i class="bi bi-trash icon"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <th:block th:if="${investmentProjects.isEmpty()}">
+                <p>Список инвестиционных проектов пуст.</p>
+            </th:block>
+        </div>
+    </div>
+</main>
+</body>
+</html>

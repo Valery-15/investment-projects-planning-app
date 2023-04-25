@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет о потребности в инвестиционных ресурсах</title>
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-resources-need/report.css}">
+</head>
+<body>
+<div th:replace="shared/header :: header"></div>
+
+<main class="main">
+    <div class="main-wrapper" th:object="${report}">
+        <h1>Отчет о потребности в инвестиционных ресурсах №<th:block th:text="*{getId()}"/></h1>
+
+        <div class="report">
+            <div class="report-parameter">
+                <div>Собственные ресурсы</div>
+                <div><th:block th:text="*{getOwnInvestmentResources()}"/></div>
+            </div>
+
+            <div class="report-parameter">
+                <div>Ресурсы, необходимые для реализации отобранных проектов</div>
+                <div><th:block th:text="*{getTotalResourcesNeed()}"/></div>
+            </div>
+
+            <div class="report-parameter">
+                <div>Потребность в заемных ресурсах</div>
+                <div><th:block th:text="*{getExternalResourcesNeed()}"/></div>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Объект инвестирования</th>
+                <th>Объем инвестируемых средств</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : *{getProjectsInfo()}">
+                <td th:text="${project.getObject()}"></td>
+                <td th:text="${project.getInvestments()} + ' ' + ${project.getCurrencyCode()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

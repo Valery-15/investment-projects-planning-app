@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование инвестиционного проекта</title>
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-projects/edit.css}">
+</head>
+<body>
+<div th:replace="shared/header :: header"></div>
+
+<main class="main">
+    <div class="main-wrapper">
+        <h1>Редактирование инвестиционного проекта</h1>
+
+        <form th:action="@{/investment-projects/{id}(id = ${projectToEditCode})}" th:method="PUT" th:object="${projectDTOToEdit}">
+            <div class="form-inner">
+                <div class="errors-section" th:if="${#fields.hasAnyErrors()}">
+                    <ul class="errors-list">
+                        <li class="error" th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="field">
+                    <label th:for="code">Код проекта</label>
+                    <input type="text" th:field="*{code}" th:value="*{getCode()}" th:id="code">
+                </div>
+
+                <div class="field">
+                    <label th:for="object">Объект инвестирования</label>
+                    <input type="text" th:field="*{object}" th:value="*{getObject()}" th:id="object">
+                </div>
+
+                <div class="field">
+                    <label th:for="implementationPeriod">Срок реализации, лет</label>
+                    <input type="text" th:field="*{implementationPeriod}" th:value="*{getImplementationPeriod()}" th:id="implementationPeriod">
+                </div>
+
+                <div class="field">
+                    <label th:for="investments">Объем инвестируемых средств</label>
+                    <div class="sum">
+                        <input type="text" th:field="*{investments}" th:value="*{getInvestments()}" th:id="investments">
+                        <select th:field="*{currencyCode}">
+                            <option th:each="code : ${currenciesCodes}" th:value="${code}" th:text="${code}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <input type="submit" value="Обновить">
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

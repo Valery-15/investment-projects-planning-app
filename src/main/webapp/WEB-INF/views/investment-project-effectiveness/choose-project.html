@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор проекта</title>
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-project-effectiveness/choose-project.css}">
+</head>
+<body>
+<!--header-->
+<div th:replace="shared/header :: header"></div>
+<!--header-->
+
+<main class="main">
+    <div class="main-wrapper">
+        <h1>Анализ эффективности инвестиционного проекта</h1>
+
+        <th:block th:if="${!investmentProjects.isEmpty()}">
+            <form th:id="form" th:method="GET">
+                <div class="form-inner">
+                    <label>Выберите инвестиционный проект для анализа эффективности:</label>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Код</th>
+                            <th>Объект инвестирования</th>
+                            <th>Объем инвестируемых средств</th>
+                            <th>Срок реализации</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="p : ${investmentProjects}">
+                            <td>
+                                <input type="radio" th:name="code" th:value="${p.getCode()}">
+                            </td>
+                            <td th:text="${p.getCode()}"></td>
+                            <td th:text="${p.getObject()}"></td>
+                            <td th:text="${p.getInvestments()} + ' ' + ${p.getCurrency().getCode()}"></td>
+                            <td th:text="${p.getImplementationPeriod()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <input class="submit-button" type="submit" value="Далее">
+                </div>
+            </form>
+        </th:block>
+
+        <th:block th:if="${investmentProjects.isEmpty()}">
+            <div class="text">Список инвестиционных проектов пуст.</div>
+            <form th:action="@{/investment-projects/new}" th:method="GET">
+                <button class="submit-button" type="submit">
+                    Создать инвестиционный проект
+                </button>
+            </form>
+        </th:block>
+    </div>
+</main>
+
+
+<script th:src="@{/scripts/js/jquery-3.6.4.min.js}"></script>
+<script>
+    $('#form').submit(function () {
+        if (!$('input[name="code"]').is(':checked')) {
+            alert('Выберите инвестиционный проект для анализа эффективности!');
+            return false;
+        }
+        this.setAttribute("action", "/investment-project-effectiveness/" + $('input[name="code"]:checked').val() + "/enter-initial-data");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Исходные данные</title>
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-resources-need/initial-data.css}">
+</head>
+<body>
+<div th:replace="shared/header :: header"></div>
+
+<main class="main">
+    <div class="main-wrapper" th:if="${!investmentProjects.isEmpty()}">
+        <h1>Определение потребности в инвестиционных ресурсах</h1>
+
+        <form th:id="form" th:action="@{/investment-resources-need/calculate-resources-need}" th:method="POST" th:object="${resourcesReportForm}">
+            <div class="form-inner">
+                <label>Введите размер собственных инвестиционных средств предприятия:</label>
+                <div class="own-resources-field">
+                    <input th:field="*{ownInvestmentResources}" type="text">
+                    <select th:field="*{currencyCode}">
+                        <option th:each="code : ${currenciesCodes}" th:value="${code}" th:text="${code}"></option>
+                    </select>
+                </div>
+
+                <input type="hidden" th:field ="*{projectsCodesJson}">
+
+                <label>Выберите инвестиционные проекты для реализации:</label>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Код</th>
+                        <th>Объект инвестирования</th>
+                        <th>Объем инвестируемых средств</th>
+                        <th>Срок реализации</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${investmentProjects}">
+                        <td>
+                            <input type="checkbox" th:name="projectCode" th:value="${project.getCode()}">
+                        </td>
+                        <td th:text="${project.getCode()}"></td>
+                        <td th:text="${project.getObject()}"></td>
+                        <td th:text="${project.getInvestments()} + ' ' + ${project.getCurrency().getCode()}"></td>
+                        <td th:text="${project.getImplementationPeriod()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <input class="submit-button" type="submit" value="Рассчитать потребность в ресурсах">
+            </div>
+        </form>
+    </div>
+
+    <div class="main-wrapper" th:if="${investmentProjects.isEmpty()}">
+        <p>Список инвестиционных проектов пуст.</p>
+        <form th:action="@{/investment-projects/new}" th:method="GET">
+            <button class="submit-button" type="submit">
+                Создать инвестиционный проект
+            </button>
+        </form>
+    </div>
+</main>
+
+<script th:src="@{/scripts/js/jquery-3.6.4.min.js}"></script>
+<script>
+    $('#form').submit(function (){
+        if(isNaN(parseFloat($('input[name="ownInvestmentResources"]').val()))){
+            alert('Неверный размер собственных инвестиционных средств, находящихся в распоряжении предприятия!');
+            return false;
+        }
+
+        let project_code_inputs = $('input[name="projectCode"]');
+        if (!project_code_inputs.is(':checked')) {
+            alert('Выберите хотя бы один инвестиционный проект для реализации!');
+            return false;
+        }
+
+        let selected_projects_codes = [];
+        project_code_inputs.each(function (){
+            if($(this).is(':checked')){
+                selected_projects_codes.push($(this).val());
+            }
+        });
+
+        $('input[name="projectsCodesJson"]').val(JSON.stringify(selected_projects_codes));
+    });
+</script>
+
+</body>
+</html>

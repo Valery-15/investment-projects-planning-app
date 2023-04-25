@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет об эффективности проекта</title>
+    <link rel="stylesheet" th:href="@{/styles/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/investment-project-effectiveness/report.css}">
+</head>
+<body>
+<div th:replace="shared/header :: header"></div>
+
+<main class="main">
+    <div class="main-wrapper" th:object="${report}">
+        <h1>Отчет об эффективности инвестиционного проекта №<th:block th:text="*{getId()}"/></h1>
+
+        <div class="initial-data">
+            <div class="project">
+                <div class="project-parameter">
+                    <div>Дата</div>
+                    <div th:text="*{getDateTime()}"></div>
+                </div>
+                <div class="project-parameter">
+                    <div>Код проекта</div>
+                    <div th:text="*{getProject().getCode()}"></div>
+                </div>
+                <div class="project-parameter">
+                    <div>Объект вложений</div>
+                    <div th:text="*{getProject().getObject()}"></div>
+                </div>
+                <div class="project-parameter">
+                    <div>Инвестиции</div>
+                    <div th:text="*{getProject().getInvestments() + ' ' + getProject().getCurrency().getCode()}"></div>
+                </div>
+                <div class="project-parameter">
+                    <div>Срок реализации</div>
+                    <div th:text="*{getProject().getImplementationPeriod()}"></div>
+                </div>
+                <div class="project-parameter">
+                    <div>Ставка дисконтирования</div>
+                    <div th:text="*{getDiscountRate()}"></div>
+                </div>
+            </div>
+
+            <div class="cashflows">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Год реализации проекта</th>
+                        <th>Денежный поток,
+                            <th:block th:text="*{getProject().getCurrency().getCode()}"/>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cashFlow : ${report.getCashFlows().entrySet()}">
+                        <td th:text="${cashFlow.getKey()}"></td>
+                        <td th:text="${cashFlow.getValue()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="indicators">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Показатель эффективности</th>
+                    <th>Анализ значения</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="indicator : ${report.getIndicatorsReports()}">
+                    <td th:text="${indicator.getIndicator().getAbbreviation()} + ' = ' + ${indicator.getValue()}"></td>
+                    <td th:text="${indicator.getValueAnalysis()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

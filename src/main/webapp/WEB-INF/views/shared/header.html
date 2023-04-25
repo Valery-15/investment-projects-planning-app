@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/shared/header.css}">
+</head>
+<body>
+<header class="header" th:fragment="header">
+    <div class="header-wrapper">
+        <div class="header-logo">
+            <a href="/" class="logo-link">
+                <div class="logo">
+                    <i class="bi bi-briefcase-fill icon"></i>
+                    <span class="name">Smart Invest</span>
+                </div>
+            </a>
+        </div>
+        <nav class="header-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/investment-projects" class="nav-link">Инвестиционные проекты</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/investment-project-effectiveness/choose-project" class="nav-link">Анализ эффективности</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/investment-resources-need/enter-initial-data" class="nav-link">Потребность в ресурсах</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

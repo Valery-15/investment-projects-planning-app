@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/home.css}">
+</head>
+<body>
+<main class="main">
+    <div class="main-menu-wrapper">
+<!--        <div class="main-menu-logo">-->
+<!--            <img class="main-menu-logo-img" th:src="@{/img/logo-2.png}">-->
+<!--        </div>-->
+
+        <div class="main-menu-list">
+
+            <div class="main-menu-item">
+                <a class="main-menu-item-link" href="/investment-projects">
+                    <div class="main-menu-item-inner">
+                        <i class="main-menu-item-icon bi bi-list-ol"></i>
+                        <h2 class="main-menu-item-text">Инвестиционные проекты</h2>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="main-menu-item">
+                <a class="main-menu-item-link" href="/investment-project-effectiveness/choose-project">
+                    <div class="main-menu-item-inner">
+                        <i class="main-menu-item-icon bi bi-graph-up"></i>
+                        <h2 class="main-menu-item-text">Анализ эффективности инвестиционного проекта</h2>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="main-menu-item">
+                <a class="main-menu-item-link" href="/investment-resources-need/reports">
+                    <div class="main-menu-item-inner">
+                        <i class="main-menu-item-icon bi bi-coin"></i>
+                        <h2 class="main-menu-item-text">Определение потребности в инвестиционных ресурсах</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

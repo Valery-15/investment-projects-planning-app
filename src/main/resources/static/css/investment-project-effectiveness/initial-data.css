@@ -1,0 +1,96 @@
+.main-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 1em;
+}
+
+.effectiveness-report-form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 80%;
+}
+
+.chosen-project-info {
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+.parameter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.effectiveness-report-form-inner {
+    display: flex;
+    flex-direction: column;
+    /*width: 100%;*/
+}
+
+.field {
+    margin-bottom: 1em;
+}
+
+label {
+    margin-bottom: 1em;
+}
+
+input[type=text] {
+    height: 1.75em;
+    margin-bottom: 0.5em;
+    padding: 0 15px;
+    border-radius: 0.75em;
+    border: none;
+    background: #E9EFF6;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.cashflows-section {
+    margin-left: 1em;
+}
+
+.cashflows-section input[type=text] {
+    width: 100px;
+    height: 1.75em;
+    margin-bottom: 0.5em;
+    margin-left: 10px;
+    padding: 0 15px;
+    border-radius: 0.75em;
+    border: none;
+    background: #E9EFF6;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.submit-button {
+    padding: 0 15px;
+    margin: 10px 0 15px;
+    border-width: 0;
+    border-radius: 20px;
+    background: #63b175;
+    color: white;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    height: 1.75em;
+}

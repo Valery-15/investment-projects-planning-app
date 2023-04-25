@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-project-effectiveness/indicators.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-project-effectiveness" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-project-effectiveness/report.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-project-effectiveness" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-resources-need/initial-data.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/investment-resources-need" />
+      </map>
+    </option>
+  </component>
+</project>

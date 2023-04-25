@@ -1,0 +1,60 @@
+.main-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project {
+    width: 55%;
+}
+
+.object-info-header {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 3em 0 0;
+}
+
+.icon-button {
+    border: none;
+    background-color: transparent;
+}
+
+.icon {
+}
+
+.object-info-params {
+    width: 100%;
+}
+
+.object-info-parameter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.project-reports {
+    width: 35%;
+}
+
+.table-header {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto 20px;
+}
